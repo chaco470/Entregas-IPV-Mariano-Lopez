@@ -6,6 +6,3 @@
 [node name="Sprite" instance=ExtResource( 1 )]
 texture = ExtResource( 2 )
 speed = 300.0
-
-[node name="Timer" parent="." index="0"]
-wait_time = 3.0

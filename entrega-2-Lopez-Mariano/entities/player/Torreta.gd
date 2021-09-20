@@ -5,7 +5,7 @@ var player
 var projectile_container:Node
 onready var fire_position = $Fire_Position
 
-func set_values(player:Sprite, container:Node):
+func set_values(player:KinematicBody2D, container:Node):
 	self.player = player
 	projectile_container= container
 	$Timer.start()
