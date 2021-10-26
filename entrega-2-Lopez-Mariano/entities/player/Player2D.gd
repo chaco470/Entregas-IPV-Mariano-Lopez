@@ -15,7 +15,12 @@ func set_projectile_container(container:Node):
 
 func _physics_process(delta):
 	
-	#position.x += direction * speed * delta
+	var axis = get_input_axis()
+	if axis == Vector2.ZERO:
+		apply_friction(acceleration * delta)
+	else:
+		apply_movement(axis * acceleration *delta)
+	motion = move_and_slide(motion)
 
 	# Manera optimizada
 	var direction_optimized:int = int(Input.is_action_pressed("move_right")) - int(Input.is_action_pressed("move_left"))
@@ -42,11 +47,14 @@ func apply_friction(amount):
 		motion = Vector2.ZERO
 
 func apply_movement(acceletarion_):
-	motion += Vector2(acceletarion_,0)
+	motion += acceletarion_
 	motion = motion.clamped(max_speed)
 
-
-
+func get_input_axis():
+	var axis = Vector2.ZERO
+	axis.x = int(Input.is_action_pressed("move_right")) - int(Input.is_action_pressed("move_left"))
+	axis.y = int(Input.is_action_pressed("move_down")) - int(Input.is_action_pressed("move_up"))
+	return axis.normalized()
 
 
 
